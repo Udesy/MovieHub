@@ -1,0 +1,67 @@
+<%- include('partials/header.ejs') %>
+<!-- Banner -->
+    <div class="search-box">
+        <form action="/search" id="form" method="post">
+            <input type="text" class="search-input" name="movie_name" placeholder="What are you looking for...." >
+            <button id="search" type="submit" class="search-button">Search</button>
+        </form>
+    </div>
+    <div class="search-background">
+        <img src="search-background.jpg" >
+    </div>
+    <% if(locals.search_data){ %>
+        <div class="heading search-heading">
+            <h2><i class="fa-solid fa-magnifying-glass"></i> Search Results</h2>
+        </div>
+        <div class="search-result">
+            <% search_data.forEach(data => { %>
+                <div class="result-slide">
+                    <a href="/view/<%= data.id %>" id="clickeable">
+                        <ul>
+                            <li><img src="https://image.tmdb.org/t/p/w500<%= data.poster_path %>"></li>
+                            <li class="movie_title"><%= data.title %></li>
+                            <li><%= data.vote_average %></li>   
+                        </ul>
+                    </a>
+                </div>
+            <% }); %>
+        </div>
+    <% }else{ %>
+        <div class="heading popular-heading">
+        <h2><i class="fa-solid fa-fire-flame-curved"></i> Popular Movies</h2>
+    </div>
+    <div class="content content-popular">
+        <% for(let i= 0; i< 6; i++){ %>
+            <% popularmoviedata.forEach(data => { %>
+                <div class="content-slide">
+                    <a href="/view/<%= data.id%>" id="clickeable">
+                        <ul>
+                            <li><img src="https://image.tmdb.org/t/p/w500<%= data.poster_path %>"></li>
+                            <li class="movie_title"><%= data.title %></li>
+                            <li><%= data.vote_average %></li>   
+                        </ul>
+                    </a>
+                </div>
+            <% }); %>
+        <% } %>
+    </div>
+    <div class="heading trend-heading">
+        <h2><i class="fa-solid fa-arrow-trend-up"></i>  Trending Movies</h2>
+    </div>
+    <div class="content content-trending">
+        <% for(let i= 0; i< 6; i++){ %>
+            <% trendmoviedata.forEach(data => { %>
+                <div class="content-slide">
+                    <a href="/view/<%= data.id %>" id="clickeable">
+                        <ul>
+                            <li><img src="https://image.tmdb.org/t/p/w500<%= data.poster_path %>"></li>
+                            <li class="movie_title"><%= data.title %></li>
+                            <li><%= data.vote_average %></li>   
+                        </ul>
+                    </a>
+                </div>
+            <% }); %>
+        <% } %>
+    </div>
+   <% } %>
+<%- include('partials/footer.ejs') %>

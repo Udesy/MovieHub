@@ -7,6 +7,7 @@ const port = 3000;
 
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));
+app.set('view engine', 'ejs');
 
 
 const API_KEY = "&api_key=4ce47dea628789a25e9e5e4eb744be91";
